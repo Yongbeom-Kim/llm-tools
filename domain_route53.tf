@@ -1,5 +1,9 @@
 resource "aws_route53_zone" "main" {
     name = var.webite_domain
+
+    lifecycle {
+      prevent_destroy = true
+    }
 }
 
 resource "aws_route53_record" "record" {

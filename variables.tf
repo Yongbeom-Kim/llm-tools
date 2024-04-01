@@ -1,12 +1,22 @@
 # utl = ${subdomain_name}.${website_domain}
-variable "webite_domain" {
+variable webite_domain {
     type        = string
     description = "The domain of the website hosted on the S3 bucket"
 }
 
-variable "subdomain_name" {
+variable subdomain_name {
     type        = string
     description = "The subdomain name of the website hosted on the S3 bucket"
+}
+
+variable aws_access_key {
+    type = string
+    description = "AWS Access Key"
+}
+
+variable aws_secret_key {
+    type = string
+    description = "AWS Secret Key"
 }
 
 locals {
