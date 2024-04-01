@@ -1,4 +1,4 @@
-webite_domain = "example.com"
-subdomain_name = "tools"
+webite_domain  = "example.com"
+subdomain_name = "subdomain"
 aws_access_key = "INSERT_ACCESS_KEY"
 aws_secret_key = "INSERT_SECRET_KEY"

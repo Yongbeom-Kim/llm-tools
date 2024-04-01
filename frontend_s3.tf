@@ -1,50 +1,50 @@
 resource "aws_s3_bucket" "frontend_bucket" {
-    bucket = local.frontend_bucket_name
-    tags   = local.resource_tags
+  bucket = local.frontend_bucket_name
+  tags   = local.resource_tags
 }
 
 
 
 resource "aws_s3_bucket_website_configuration" "frontend_bucket_website_config" {
-    bucket = aws_s3_bucket.frontend_bucket.id
+  bucket = aws_s3_bucket.frontend_bucket.id
 
-    index_document {
-        suffix = "index.html"
-    }
+  index_document {
+    suffix = "index.html"
+  }
 }
 
 resource "aws_s3_bucket_public_access_block" "example" {
-    bucket = aws_s3_bucket.frontend_bucket.id
+  bucket = aws_s3_bucket.frontend_bucket.id
 
-    block_public_acls       = false
-    block_public_policy     = false
-    ignore_public_acls      = false
-    restrict_public_buckets = false
+  block_public_acls       = false
+  block_public_policy     = false
+  ignore_public_acls      = false
+  restrict_public_buckets = false
 }
 
 resource "aws_s3_bucket_policy" "frontend_bucket_policy" {
-    bucket = aws_s3_bucket.frontend_bucket.id
+  bucket = aws_s3_bucket.frontend_bucket.id
 
-    policy = jsonencode({
-        "Version": "2012-10-17",
-        "Statement": [
-            {
-                "Sid": "PublicReadGetObject",
-                "Effect": "Allow",
-                "Principal": "*",
-                "Action": [
-                    "s3:GetObject"
-                ],
-                "Resource": [
-                    "arn:aws:s3:::${local.frontend_bucket_name}/*"
-                ]
-            }
+  policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Sid" : "PublicReadGetObject",
+        "Effect" : "Allow",
+        "Principal" : "*",
+        "Action" : [
+          "s3:GetObject"
+        ],
+        "Resource" : [
+          "arn:aws:s3:::${local.frontend_bucket_name}/*"
         ]
-    })
+      }
+    ]
+  })
 }
 
 module "dir" {
-  source  = "hashicorp/dir/template"
+  source = "hashicorp/dir/template"
 
   base_dir = "${path.module}/frontend/dist"
 }
