@@ -1,3 +1,7 @@
+output "s3_bucket_address" {
+    value = local.website_endpoint
+}
+
 output "website_address" {
-    value = aws_s3_bucket_website_configuration.frontend_bucket_website_config.website_endpoint
+    value = join(".", [var.subdomain_name, var.webite_domain])
 }

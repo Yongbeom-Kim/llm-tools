@@ -1,17 +1,9 @@
-variable "frontend_bucket_name" {
-    type        = string
-    description = "The name of the S3 bucket to store the frontend files"
-}
-
 resource "aws_s3_bucket" "frontend_bucket" {
-    bucket = var.frontend_bucket_name
-
-    tags   = {
-        Name        = "LLM Tools Frontend Bucket"
-        Environment = "Production"
-        Deployed_by = "Terraform"
-    }
+    bucket = local.frontend_bucket_name
+    tags   = local.resource_tags
 }
+
+
 
 resource "aws_s3_bucket_website_configuration" "frontend_bucket_website_config" {
     bucket = aws_s3_bucket.frontend_bucket.id
@@ -44,7 +36,7 @@ resource "aws_s3_bucket_policy" "frontend_bucket_policy" {
                     "s3:GetObject"
                 ],
                 "Resource": [
-                    "arn:aws:s3:::${var.frontend_bucket_name}/*"
+                    "arn:aws:s3:::${local.frontend_bucket_name}/*"
                 ]
             }
         ]
@@ -58,7 +50,7 @@ module "dir" {
 }
 
 resource "aws_s3_object" "object" {
-  bucket       = var.frontend_bucket_name
+  bucket       = local.frontend_bucket_name
   for_each     = module.dir.files
   key          = each.key
   content_type = each.value.content_type
@@ -73,3 +65,4 @@ resource "aws_s3_object" "object" {
   # MD5 hash of that object.
   etag = each.value.digests.md5
 }
+
