@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { useState, useEffect } from "react";
 import { HamburgerIcon } from "./HamburgerIcon";
 
-export default function Sidebar() {
+const Sidebar: React.FC<React.HTMLAttributes<HTMLDivElement>> = () => {
   const [active, setActive] = useState(false);
 
   useEffect(() => {
@@ -24,4 +24,6 @@ export default function Sidebar() {
       </div>
     </div>
   );
-}
+};
+
+export default Sidebar;
