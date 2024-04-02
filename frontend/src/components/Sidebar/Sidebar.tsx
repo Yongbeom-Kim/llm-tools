@@ -17,7 +17,7 @@ const Sidebar: React.FC<React.HTMLAttributes<HTMLDivElement>> = () => {
       )}
     >
       <div
-        className={`absolute top-2 right-3 flex items-center justify-center aspect-square m-2 w-13 cursor-pointer hover:bg-slate-900 rounded-full`}
+        className={`absolute top-2 right-2 size-12 p-2 flex items-center justify-center aspect-square cursor-pointer hover:bg-slate-900 rounded-full`}
         onClick={() => setActive((active) => !active)}
       >
         <HamburgerIcon className="w-6 inline-block m-auto" active={active} />
