@@ -3,40 +3,49 @@ import { useRef } from "react";
 
 type HamburgerIconProps = {
   active: boolean;
+  setActive: React.Dispatch<React.SetStateAction<boolean>>;
+  hamburgerColor: string;
 } & React.HTMLAttributes<HTMLDivElement>;
 
 export const HamburgerIcon: React.FunctionComponent<HamburgerIconProps> = ({
   active,
+  setActive,
+  hamburgerColor,
   ...props
 }: HamburgerIconProps) => {
   const self = useRef<HTMLDivElement>(null);
 
   return (
     <div
-      ref={self}
-      className={classNames(
-        "flex flex-col justify-center items-center w-full aspect-square"
-      )}
-      {...props}
+      className={`ml-auto mr-2 mt-2 size-12 p-2 flex items-center justify-center aspect-square cursor-pointer hover:bg-dark-primary rounded-full`}
+      onClick={() => setActive((active) => !active)}
     >
-      <span
+      <div
+        ref={self}
         className={classNames(
-          `block bg-white h-1 my-1 rounded-full transition-all duration-200 ease-in-out`,
-          { [`rotate-45 origin-top-left translate-x-1`]: active }
+          "flex flex-col justify-center items-center w-full aspect-square"
         )}
-      ></span>
-      <span
-        className={classNames(
-          `block bg-white h-1 my-1 rounded-full transition-all duration-200 ease-in-out`,
-          { "opacity-0": active }
-        )}
-      ></span>
-      <span
-        className={classNames(
-          `block bg-white h-1 my-1 rounded-full transition-all duration-200 ease-in-out`,
-          { [`-rotate-45 origin-bottom-left translate-x-1`]: active }
-        )}
-      ></span>
+        {...props}
+      >
+        <span
+          className={classNames(
+            `block ${hamburgerColor} h-1 my-1 rounded-full transition-all duration-200 ease-in-out`,
+            { [`rotate-45 origin-top-left translate-x-1`]: active }
+          )}
+        ></span>
+        <span
+          className={classNames(
+            `block ${hamburgerColor} h-1 my-1 rounded-full transition-all duration-200 ease-in-out`,
+            { "opacity-0": active }
+          )}
+        ></span>
+        <span
+          className={classNames(
+            `block ${hamburgerColor} h-1 my-1 rounded-full transition-all duration-200 ease-in-out`,
+            { [`-rotate-45 origin-bottom-left translate-x-1`]: active }
+          )}
+        ></span>
+      </div>
     </div>
   );
 };

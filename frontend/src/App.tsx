@@ -1,10 +1,16 @@
+import { useState } from "react";
 import "./App.css";
 import Sidebar from "./components/Sidebar/Sidebar";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
+  const [sidebarActive, setSidebarActive] = useState(false);
   return (
-    <div className="absolute justify-center grid lg:grid-cols-12 sm:grid-cols-8 grid-cols-4 gap-5 w-screen h-screen bg-black">
-      <Sidebar />
+    <div className="absolute w-screen h-screen bg-very-dark-primary flex flex-row">
+      <Sidebar active={sidebarActive} setActive={setSidebarActive} />
+      <div className={`block w-auto m-0 flex-grow`}>
+        <Navbar />
+      </div>
     </div>
   );
 }
