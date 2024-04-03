@@ -5,6 +5,8 @@ type SelectFormProps = {
   items: string[];
   selectedIndex?: number;
 };
+
+// FIXME: keyboard accessiblity
 const SelectForm: React.FC<SelectFormProps> = ({ items, selectedIndex: i }) => {
   const [selectedIndex, setSelectedIndex] = useState(i ?? -1);
   const [isActive, setActive] = useState(false);
@@ -41,7 +43,8 @@ const SelectForm: React.FC<SelectFormProps> = ({ items, selectedIndex: i }) => {
                 type="radio"
                 name="select_form"
                 id={item}
-                className="invisible"
+                tabIndex={0}
+                className="fixed opacity-0 pointer-events-none"
               />
               <label htmlFor={item}>{item}</label>
             </li>
