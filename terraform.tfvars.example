@@ -1,4 +1,10 @@
-webite_domain  = "example.com"
-subdomain_name = "subdomain"
+# url = ${subdomain_name}.${website_domain}
+website_domain = "yongbeom.com"
+subdomain_name = "tools"
+
+# IAM User Auth
 aws_access_key = "INSERT_ACCESS_KEY"
 aws_secret_key = "INSERT_SECRET_KEY"
+
+# Route53 Zone
+aws_route53_zone_id = "INSERT_ZONE_ID"

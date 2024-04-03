@@ -1,5 +1,5 @@
-# utl = ${subdomain_name}.${website_domain}
-variable "webite_domain" {
+# url = ${subdomain_name}.${website_domain}
+variable "website_domain" {
   type        = string
   description = "The domain of the website hosted on the S3 bucket"
 }
@@ -19,9 +19,14 @@ variable "aws_secret_key" {
   description = "AWS Secret Key"
 }
 
+variable "aws_route53_zone_id" {
+  type        = string
+  description = "AWS Route53 Zone ID of the Route53 hosted zone to use for the DNS recods."
+}
+
 locals {
   # Bucket must have same name as domain
-  frontend_bucket_name = join(".", [var.subdomain_name, var.webite_domain])
+  frontend_bucket_name = join(".", [var.subdomain_name, var.website_domain])
 
   # Tags for all resources
   resource_tags = {
@@ -30,7 +35,7 @@ locals {
     Deployed_by = "Terraform"
   }
 
-  website_domain = aws_s3_bucket_website_configuration.frontend_bucket_website_config.website_domain
-
-  website_endpoint = aws_s3_bucket_website_configuration.frontend_bucket_website_config.website_endpoint
+  s3_website_endpoint         = aws_s3_bucket_website_configuration.frontend_bucket_website_config.website_endpoint
+  cloudfront_website_endpoint = aws_cloudfront_distribution.s3_distribution.domain_name
+  website_endpoint            = join(".", [var.subdomain_name, var.website_domain])
 }
