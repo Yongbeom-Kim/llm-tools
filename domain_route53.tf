@@ -1,3 +1,4 @@
+# This is imported. Should have used an import block, but oh well
 resource "aws_route53_zone" "main" {
   name = var.webite_domain
 
@@ -6,6 +7,9 @@ resource "aws_route53_zone" "main" {
   }
 }
 
+# There is this stupid bug where a trailing dot is added to the alias name,
+#   and it causes the lookup to fail because AWS S3 buckets just fail to handle these URLs?
+# So we have to remove the trailing dot by hand in the web config.
 resource "aws_route53_record" "record" {
   zone_id = aws_route53_zone.main.zone_id
   name    = var.subdomain_name
