@@ -17,7 +17,7 @@ export const HamburgerIcon: React.FunctionComponent<HamburgerIconProps> = ({
 
   return (
     <div
-      className={`m-0 size-18 flex items-center justify-center aspect-square cursor-pointer hover:bg-dark-primary rounded-full`}
+      className={`m-1 size-18 flex items-center justify-center aspect-square cursor-pointer hover:bg-primary-200 rounded-full`}
       onClick={() => setActive((active) => !active)}
       onKeyDown={(e) => e.code == "Enter" && setActive((active) => !active)}
       tabIndex={0}

@@ -15,13 +15,14 @@ const SidebarEntry: React.FC<SidebarEntryProps> = ({
 }) => {
   const [isHover, setHover] = useState(false);
 
+  const hoverBg = "bg-primary-200";
   return (
     <>
       <div
         className={classNames(
-          "flex col justify-start items-center p-2 text-very-light-primary",
+          "flex col justify-start items-center p-2 text-primary-900",
           sidebarAnimation,
-          { "bg-dark-primary": isHover },
+          { [`${hoverBg}`]: isHover },
           { "opacity-0 -translate-x-16": !isExpanded }
         )}
         onMouseOver={() => setHover(true)}
@@ -34,13 +35,13 @@ const SidebarEntry: React.FC<SidebarEntryProps> = ({
           " m-0 w-full aspect-square justify-self-center flex justify-center items-center",
           sidebarAnimation,
           { "rounded-full": !isExpanded },
-          { "bg-dark-primary": isHover }
+          { [`${hoverBg}`]: isHover }
         )}
         onMouseOver={() => setHover(true)}
         onMouseOut={() => setHover(false)}
         tabIndex={0}
       >
-        <Icon className="size-6 block bg-transparent fill-very-light-primary" />
+        <Icon className="size-6 block bg-transparent fill-primary-900" />
       </div>
     </>
   );

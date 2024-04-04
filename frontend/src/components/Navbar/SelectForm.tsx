@@ -12,20 +12,22 @@ const SelectForm: React.FC<SelectFormProps> = ({ items, selectedIndex: i }) => {
   const [isActive, setActive] = useState(false);
 
   return (
-    <div className="relative text-very-light-primary m-5">
+    <div className="relative text-primary-900 m-5">
+      {/* Form Button */}
       <button
-        className=" flex items-center justify-start py-2 pl-3 pr-4 border-solid border-light-primary border-[1px] rounded-lg hover:bg-primary hover:text-very-light-primary transition-all duration-300 ease-in-out"
+        className="flex items-center justify-start py-2 pl-3 pr-4 border-none rounded-lg hover:bg-primary-300 transition-all duration-300 ease-in-out"
         onClick={() => setActive((isActive) => !isActive)}
       >
         <div className="min-w-20 text-left">
           {items[selectedIndex] ?? "Selection"}
         </div>
         {/* Triangle */}
-        <div className="size-0 border-4 border-x-transparent border-b-transparent border-t-very-light-primary translate-x-full translate-y-1/3"></div>
+        <div className="size-0 border-4 border-x-transparent border-b-transparent border-t-primary-900 translate-x-full translate-y-1/3"></div>
       </button>
+      {/* List */}
       <ul
         className={classNames(
-          "w-full absolute border-solid border-[1px] rounded-lg py-1 bg-dark-primary top-12 transition-all duration-200 ease-in-out",
+          "w-full absolute border-solid border-[1px] rounded-lg py-2 bg-primary-300 top-12 transition-all duration-200 ease-in-out",
           { "invisible opacity-0 -translate-y-1/2": !isActive, "": isActive }
         )}
       >
@@ -34,8 +36,8 @@ const SelectForm: React.FC<SelectFormProps> = ({ items, selectedIndex: i }) => {
             <li
               key={item}
               className={classNames(
-                "w-full appearance-none list-none hover:bg-primary",
-                { "bg-primary": selectedIndex === i }
+                "w-full appearance-none list-none hover:bg-primary-400",
+                { "bg-primary-400": selectedIndex === i }
               )}
               onClick={() => (setSelectedIndex(i), setActive(false))}
             >
@@ -46,24 +48,14 @@ const SelectForm: React.FC<SelectFormProps> = ({ items, selectedIndex: i }) => {
                 tabIndex={0}
                 className="fixed opacity-0 pointer-events-none"
               />
-              <label htmlFor={item}>{item}</label>
+              <label className="px-3 py-1" htmlFor={item}>
+                {item}
+              </label>
             </li>
           );
         })}
       </ul>
     </div>
-    // <form>
-    //   <select
-    //     value={"1"}
-    //     className="outline-none appearance-none border-none bg-inherit"
-    //   >
-    //     <option className={"outline-none appearance-none bg-inherit"} value="1">
-    //       Tool 1
-    //     </option>
-    //     <option value="2">Tool 2</option>
-    //     <option value="3">Tool 3</option>
-    //   </select>
-    // </form>
   );
 };
 

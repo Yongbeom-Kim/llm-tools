@@ -6,7 +6,7 @@ import Navbar from "./components/Navbar/Navbar";
 function App() {
   const [sidebarActive, setSidebarActive] = useState(false);
   return (
-    <div className="absolute w-screen h-screen bg-very-dark-primary flex flex-row">
+    <div className="absolute w-screen h-screen bg-white flex flex-row">
       <Sidebar active={sidebarActive} setActive={setSidebarActive} />
       <div className={`block w-auto m-0 flex-grow`}>
         <Navbar />
