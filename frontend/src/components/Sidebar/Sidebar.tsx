@@ -3,19 +3,20 @@ import { HamburgerIcon } from "./HamburgerIcon";
 import SidebarEntry from "./SidebarEntry/SidebarEntry";
 import ChatMessageIcon from "./SidebarIcons/ChatMessageIcon";
 import TextFileLineIcon from "./SidebarIcons/TextFileLineIcon";
+import { route as base_chat_route } from "../../pages/BaseChat/BaseChat";
+import { route as prompt_chat_route } from "../../pages/PromptChat/PromptChat";
+import { useState } from "react";
 
-type SidebarProps = {
-  active: boolean;
-  setActive: React.Dispatch<React.SetStateAction<boolean>>;
-} & React.HTMLAttributes<HTMLDivElement>;
+type SidebarProps = React.HTMLAttributes<HTMLDivElement>;
 
 export const sidebarAnimation = "transition-all duration-300 ease-in-out";
-const Sidebar: React.FC<SidebarProps> = ({ active, setActive, ...props }) => {
+const Sidebar: React.FC<SidebarProps> = ({ ...props }) => {
+  const [active, setActive] = useState(false);
   return (
     <>
       <div
         className={classNames(
-          `relative h-full bg-slate-300 overflow-hidden grid content-start gap-0`,
+          `relative h-full bg-primary-300 overflow-hidden grid content-start gap-0`,
           { "grid-cols-[0px_64px]": !active, "grid-cols-[196px_64px]": active },
           sidebarAnimation
         )}
@@ -42,12 +43,14 @@ const Sidebar: React.FC<SidebarProps> = ({ active, setActive, ...props }) => {
           label="label"
           icon={ChatMessageIcon}
           isExpanded={active}
+          href={base_chat_route}
           {...props}
         />
         <SidebarEntry
           label="label2"
           icon={TextFileLineIcon}
           isExpanded={active}
+          href={prompt_chat_route}
           {...props}
         />
       </div>

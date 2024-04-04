@@ -1,17 +1,33 @@
-import { useState } from "react";
 import "./App.css";
-import Sidebar from "./components/Sidebar/Sidebar";
-import Navbar from "./components/Navbar/Navbar";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import React from "react";
+import BaseChatPage, {
+  route as base_chat_route,
+} from "./pages/BaseChat/BaseChat";
+import PromptChatPage, {
+  route as prompt_chat_route,
+} from "./pages/PromptChat/PromptChat";
 
 function App() {
-  const [sidebarActive, setSidebarActive] = useState(false);
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <div>Initial Page</div>,
+    },
+    {
+      path: base_chat_route,
+      element: <BaseChatPage />,
+    },
+    {
+      path: prompt_chat_route,
+      element: <PromptChatPage />,
+    },
+  ]);
+
   return (
-    <div className="absolute w-screen h-screen bg-white flex flex-row">
-      <Sidebar active={sidebarActive} setActive={setSidebarActive} />
-      <div className={`block w-auto m-0 flex-grow`}>
-        <Navbar />
-      </div>
-    </div>
+    <React.StrictMode>
+      <RouterProvider router={router} />
+    </React.StrictMode>
   );
 }
 
